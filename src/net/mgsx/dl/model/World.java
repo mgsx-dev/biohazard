@@ -48,18 +48,24 @@ public class World {
 	public void cursor(float x, float y) {
 		cursor.position.set(x, y);
 	}
+	
+	private Enemy createEnemy(int energy){
+		Enemy enemy = new Enemy();
+		enemy.energy = energy;
+		enemy.radius = 10 * (enemy.energy + MathUtils.random(.5f));
+		enemies.add(enemy);
+		entities.add(enemy);
+		return enemy;
+	}
 
 	public void update(float delta) {
 		enemyTimeout -= delta;
 		if(enemyTimeout < 0){
 			enemyTimeout += 1f;
 			if(enemies.size < 100){ // XXX hard limit
-				Enemy enemy = new Enemy();
-				enemy.radius = 10 + MathUtils.random(20);
+				Enemy enemy = createEnemy(MathUtils.random(1, 3));
 				float angle = MathUtils.random(360f);
 				enemy.position.set(MathUtils.cosDeg(angle), MathUtils.sinDeg(angle)).scl(WIDTH + enemy.radius);
-				enemies.add(enemy);
-				entities.add(enemy);
 			}
 		}
 		
@@ -67,17 +73,26 @@ public class World {
 			entity.update(this, delta);
 		}
 		
-		for(Enemy enemy : enemies){
-			for(Hero hero : heroes){
-				float dst = enemy.radius + hero.radius;
-				if(enemy.position.dst2(hero.position) < dst*dst){
-					enemy.alive = false;
+		for(int i=0 ; i<enemies.size ; ){
+			Enemy enemy = enemies.get(i);
+			if(enemy.shieldTime <= 0)
+			{
+				for(Hero hero : heroes){
+					float dst = enemy.radius + hero.radius;
+					if(enemy.position.dst2(hero.position) < dst*dst){
+						enemy.energy--;
+						enemy.alive = false;
+						if(enemy.energy > 1){
+							for(int j=0 ; j<2 ; j++){
+								Enemy child = createEnemy(enemy.energy-1);
+								child.position.set(enemy.position).add(MathUtils.random(enemy.radius * 4), MathUtils.random(enemy.radius * 4));
+								child.shieldTime = 1;
+							}
+						}
+					}
 				}
 			}
-		}
-		
-		for(int i=0 ; i<enemies.size ; ){
-			if(enemies.get(i).alive){
+			if(enemy.alive){
 				i++;
 			}else{
 				enemies.swap(i, enemies.size-1);
