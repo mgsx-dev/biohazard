@@ -14,20 +14,24 @@ public class Home extends Entity
 	@Override
 	public void update(World world, float deltaTime) {
 		int minRadius = 30;
-		int maxRadius = 100;
+		int initRadius = 100;
+		int maxRadius = 200;
 		
+		if(radius > maxRadius){
+			radius = maxRadius;
+		}
 		if(radius < minRadius){
 			radius = minRadius;
 			growing = true;
 		}
 		if(growing){
 			radius += deltaTime * 260;
-			if(radius >= maxRadius){
-				radius = maxRadius;
+			if(radius >= initRadius){
+				radius = initRadius;
 				growing = false;
 			}
 		}else{
-			if(radius < maxRadius){
+			if(radius < initRadius){
 				radius += deltaTime * 10;
 			}
 		}

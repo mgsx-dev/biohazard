@@ -1,6 +1,7 @@
 package net.mgsx.dl.model;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
@@ -19,8 +20,9 @@ public class World {
 	
 	Entity home;
 	Array<Hero> heroes = new Array<Hero>();
-	Array<Enemy> enemies = new Array<Enemy>();
+	public Array<Enemy> enemies = new Array<Enemy>();
 	Cursor cursor;
+	public int combo;
 	
 	private float enemyTimeout;
 	
@@ -73,6 +75,11 @@ public class World {
 			entity.update(this, delta);
 		}
 		
+		combo = 0;
+		for(Hero hero : heroes){
+			combo = Math.max(combo, hero.combo);
+		}
+		
 		for(int i=0 ; i<enemies.size ; ){
 			Enemy enemy = enemies.get(i);
 			if(enemy.shieldTime <= 0)
@@ -88,6 +95,9 @@ public class World {
 								child.position.set(enemy.position).add(MathUtils.random(enemy.radius * 4), MathUtils.random(enemy.radius * 4));
 								child.shieldTime = 1;
 							}
+						}
+						if(hero.moving){
+							hero.combo++;
 						}
 					}
 				}
@@ -109,10 +119,12 @@ public class World {
 		}
 	}
 	
-	public void render(ShapeRenderer renderer) {
+	public void render(OrthographicCamera camera, ShapeRenderer renderer) {
 		
 //		Gdx.gl.glEnable(GL20.GL_BLEND);
 //		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+		
+		renderer.setProjectionMatrix(camera.combined);
 		
 		renderer.begin(ShapeType.Filled);
 		
@@ -133,8 +145,8 @@ public class World {
 		renderer.setColor(rayColor);
 		cursor.render(renderer);
 		
-		
 		renderer.end();
+		
 	}
 
 }

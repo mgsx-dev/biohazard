@@ -14,9 +14,11 @@ public class Hero extends Entity {
 	private Vector2 target = new Vector2();
 	
 	boolean moving;
+	public int combo;
 	
 	@Override
-	public void update(World world, float deltaTime) {
+	public void update(World world, float deltaTime) 
+	{
 		circle.set(position, radius);
 		circle2.set(world.home.position, world.home.radius);
 //		if(Gdx.input.isTouched()){
@@ -52,6 +54,8 @@ public class Hero extends Entity {
 		if(Intersector.overlaps(circle, circle2)){
 			position.sub(world.home.position).setLength(world.home.radius + radius).add(world.home.position);
 			moving = false;
+			world.home.radius += combo * combo * 2;
+			combo = 0;
 		}
 	}
 
