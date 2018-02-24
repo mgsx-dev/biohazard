@@ -1,6 +1,7 @@
 package net.mgsx.dl;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -13,10 +14,13 @@ import net.mgsx.dl.model.World;
 
 public class DLGameScreen extends ScreenAdapter
 {
+	public static final boolean DEBUG = true;
+	
 	private ShapeRenderer renderer;
 	private OrthographicCamera camera;
 	private Viewport viewport;
 	private World world;
+	private boolean pause;
 	
 	public DLGameScreen() {
 		camera = new OrthographicCamera();
@@ -28,10 +32,12 @@ public class DLGameScreen extends ScreenAdapter
 	@Override
 	public void render(float delta) {
 		
-		Ray ray = viewport.getPickRay(Gdx.input.getX(), Gdx.input.getY());
-		world.cursor(ray.origin.x, ray.origin.y);
+		if(DEBUG && Gdx.input.isKeyJustPressed(Keys.SPACE)) pause = !pause;
 		
-		world.update(delta);
+		Ray ray = viewport.getPickRay(Gdx.input.getX(), Gdx.input.getY());
+		if(!pause) world.cursor(ray.origin.x, ray.origin.y);
+		
+		if(!pause) world.update(delta);
 		
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

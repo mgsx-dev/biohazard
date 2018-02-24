@@ -16,7 +16,7 @@ public class Enemy extends Entity {
 			world.home.radius -= 10;
 		}else{
 			direction.scl(1f / dst);
-			position.mulAdd(direction, 100 * deltaTime);
+			position.mulAdd(direction, .1f * dst * deltaTime);
 		}
 	}
 

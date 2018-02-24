@@ -33,6 +33,7 @@ public class Cursor extends Entity{
 		}
 		else if(hero != null){
 			hero.direction.set(position).sub(hero.position).nor();
+			hero.position.mulAdd(hero.direction, 20);
 			hero.moving = true;
 			hero.radius = 20;
 			hero = null;
