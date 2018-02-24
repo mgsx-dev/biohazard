@@ -3,6 +3,7 @@ package net.mgsx.dl.gfx;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
@@ -33,6 +34,9 @@ public class SceneGFX {
 		
 		fboFlat = new FrameBuffer(Format.RGBA8888, width, height, false);
 		fboBlur = new FrameBuffer(Format.RGBA8888, width, height, false);
+		
+		fboFlat.getColorBufferTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		fboBlur.getColorBufferTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		batch = new SpriteBatch();
 		
