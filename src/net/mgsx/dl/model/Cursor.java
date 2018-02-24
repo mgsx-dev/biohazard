@@ -1,7 +1,6 @@
 package net.mgsx.dl.model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
@@ -43,7 +42,8 @@ public class Cursor extends Entity{
 
 	@Override
 	public void render(ShapeRenderer renderer) {
-		renderer.circle(position.x, position.y, radius);
+		// renderer.circle(position.x, position.y, radius);
+		
 		if(hero != null){
 			// draw ray
 			int maxRays = 7;
@@ -56,7 +56,12 @@ public class Cursor extends Entity{
 			float maxx = World.WIDTH - hero.radius;
 			float maxy = World.HEIGHT - hero.radius;
 			
+			float rad = hero.radius/4;
+			
 			for(int i=0 ; i<maxRays ; i++){
+				
+				// rad *= .5f;
+				
 				float dotx, doty;
 				
 				if(dir.x > 0){
@@ -87,17 +92,17 @@ public class Cursor extends Entity{
 						float w = (float)Math.sqrt(v*v-u*u);
 						b.set(a).mulAdd(dir, dotc - w);
 						i = maxRays;
-						renderer.setColor(Color.GREEN);
 					}
 				}
 				
 				
-				renderer.rectLine(a, b, hero.radius * 2);
-				renderer.circle(b.x, b.y, hero.radius);
+				renderer.rectLine(a, b, rad * 2);
+				renderer.circle(b.x, b.y, rad);
 				a.set(b);
 				if(dot < doty) dir.x = -dir.x;
 				if(dot < dotx) dir.y = -dir.y;
 				
+				// renderer.getColor().g *= 0.7f;
 				
 			}
 			

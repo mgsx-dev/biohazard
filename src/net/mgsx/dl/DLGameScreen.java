@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import net.mgsx.dl.gfx.SceneGFX;
 import net.mgsx.dl.model.World;
 
 public class DLGameScreen extends ScreenAdapter
@@ -21,12 +22,14 @@ public class DLGameScreen extends ScreenAdapter
 	private Viewport viewport;
 	private World world;
 	private boolean pause;
+	private SceneGFX gfx;
 	
 	public DLGameScreen() {
 		camera = new OrthographicCamera();
 		viewport = new FitViewport(World.WIDTH, World.HEIGHT, camera);
 		renderer = new ShapeRenderer();
 		world = new World();
+		gfx = new SceneGFX();
 	}
 	
 	@Override
@@ -39,15 +42,20 @@ public class DLGameScreen extends ScreenAdapter
 		
 		if(!pause) world.update(delta);
 		
-		Gdx.gl.glClearColor(0, 0, 0, 0);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		gfx.update(delta);
+		
+		gfx.begin();
 		
 		renderer.setProjectionMatrix(camera.combined);
 		world.render(renderer);
+		
+		gfx.end();
 	}
 	
 	@Override
 	public void resize(int width, int height) {
+		Gdx.gl.glClearColor(0, 0, 0, 0);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		viewport.update(width, height, true);
 	}
 }

@@ -26,12 +26,16 @@ public class Home extends Entity
 				radius = maxRadius;
 				growing = false;
 			}
+		}else{
+			if(radius < maxRadius){
+				radius += deltaTime * 10;
+			}
 		}
 	}
 	
 	@Override
 	public void render(ShapeRenderer renderer) {
-		renderer.circle(position.x, position.y, radius);
+		renderer.circle(position.x, position.y, radius + 1);
 	}
 
 	

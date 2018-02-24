@@ -10,6 +10,10 @@ public class World {
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 480;
 	
+	public static final Color homeColor = new Color(1, 0, 0, 1);
+	public static final Color ballsColor = new Color(1, 0.3f, 0, 1);
+	public static final Color rayColor = new Color(0, 1, 0, 1);
+	public static final Color enemyColor = new Color(0, 0, 1, 1);
 
 	private Array<Entity> entities = new Array<Entity>();
 	
@@ -51,7 +55,7 @@ public class World {
 			enemyTimeout += 1f;
 			if(enemies.size < 100){ // XXX hard limit
 				Enemy enemy = new Enemy();
-				enemy.radius = 10;
+				enemy.radius = 10 + MathUtils.random(20);
 				float angle = MathUtils.random(360f);
 				enemy.position.set(MathUtils.cosDeg(angle), MathUtils.sinDeg(angle)).scl(WIDTH + enemy.radius);
 				enemies.add(enemy);
@@ -92,22 +96,28 @@ public class World {
 	
 	public void render(ShapeRenderer renderer) {
 		
+//		Gdx.gl.glEnable(GL20.GL_BLEND);
+//		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+		
 		renderer.begin(ShapeType.Filled);
 		
-		renderer.setColor(Color.RED);
+		renderer.setColor(homeColor);
 		home.render(renderer);
 		
-		renderer.setColor(Color.GRAY);
+		
+		renderer.setColor(enemyColor);
 		for(Enemy enemy : enemies){
 			enemy.render(renderer);
 		}
 		
-		renderer.setColor(Color.ORANGE);
+		renderer.setColor(ballsColor);
 		for(Hero hero : heroes){
 			hero.render(renderer);
 		}
 		
+		renderer.setColor(rayColor);
 		cursor.render(renderer);
+		
 		
 		renderer.end();
 	}
