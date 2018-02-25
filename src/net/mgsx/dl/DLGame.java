@@ -11,6 +11,7 @@ public class DLGame extends Game
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 640;
 		config.height = 480;
+		config.title = "BIOHAZARD";
 		new LwjglApplication(new DLGame(), config);
 	}
 

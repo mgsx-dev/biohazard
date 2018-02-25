@@ -113,7 +113,7 @@ public class DLMenuScreen extends StageScreen
 		
 		time += delta;
 		
-		gfx.alpha = MathUtils.sin(time * 3) * MathUtils.sin(time * 300) * 0.003f + 1f + (MathUtils.sin(time) > 0.4f ? MathUtils.random() * 0.05f : 0);
+		gfx.alpha = MathUtils.sin(time * 3) * MathUtils.sin(time * 300) * 0.03f + 1f + (MathUtils.sin(time) > 0.4f ? MathUtils.random() * 0.5f : 0);
 		
 		gfx.update(delta);
 		

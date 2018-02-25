@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -55,7 +56,7 @@ public class DLGameScreen extends ScreenAdapter
 		
 		if(!pause) world.update(delta);
 		
-		gfx.alpha = world.isOver ? world.overtime : 1;
+		gfx.alpha = world.isOver ? Interpolation.pow2.apply(world.overtime) : 1;
 		
 		gfx.update(delta);
 		

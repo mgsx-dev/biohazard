@@ -20,6 +20,7 @@ public class World {
 
 	public int numKilled;
 	public int maxCombo;
+	public int level;
 	
 	private Array<Entity> entities = new Array<Entity>();
 	
@@ -37,6 +38,7 @@ public class World {
 	
 	public void reset(int level) 
 	{
+		this.level = level;
 		isOver = false;
 		
 //		// XXX
@@ -44,11 +46,11 @@ public class World {
 //		overtime = 1;
 		
 		if(level == 1){
-			enemyPeriod = 1;
+			enemyPeriod = 2;
 		}else if(level == 2){
-			enemyPeriod = .3f;
+			enemyPeriod = 2f;
 		}else{
-			enemyPeriod = .1f;
+			enemyPeriod = 2f;
 		}
 		
 		maxCombo = 0;
@@ -101,10 +103,10 @@ public class World {
 			return;
 		}
 		
-		enemyTimeout -= delta;
-		if(enemyTimeout < 0){
-			enemyTimeout += enemyPeriod;
-			if(enemies.size < 100){ // XXX hard limit
+		if(enemies.size < 100){ // XXX hard limit
+			enemyTimeout -= delta;
+			if(enemyTimeout < 0){
+				enemyTimeout += enemyPeriod / (1 + numKilled / 100);
 				Enemy enemy = createEnemy(MathUtils.random(1, 3));
 				float angle = MathUtils.random(360f);
 				enemy.position.set(MathUtils.cosDeg(angle), MathUtils.sinDeg(angle)).scl(WIDTH + enemy.radius);
@@ -197,8 +199,8 @@ public class World {
 	public void endScreen() 
 	{
 		// compute a ranking
-		int base = (int)(Math.sqrt(numKilled) / 10);
-		base += (int)(Math.sqrt(maxCombo) / 10);
+		int base = (int)(numKilled / 200);
+		base += (int)(Math.sqrt(maxCombo) / 2);
 		char letter = (char)('F' - Math.min(base, 5));
 		
 		

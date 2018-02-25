@@ -19,6 +19,8 @@ public class Hero extends Entity {
 	@Override
 	public void update(World world, float deltaTime) 
 	{
+		radius = 20 + combo;
+		
 		circle.set(position, radius);
 		circle2.set(world.home.position, world.home.radius);
 //		if(Gdx.input.isTouched()){
@@ -52,9 +54,11 @@ public class Hero extends Entity {
 			position.mulAdd(direction, (len - world.home.radius - radius) * deltaTime);
 		}
 		if(Intersector.overlaps(circle, circle2)){
-			position.sub(world.home.position).setLength(world.home.radius + radius).add(world.home.position);
+			position.sub(world.home.position);
+			if(position.len() > 1)
+				position.setLength(world.home.radius + radius).add(world.home.position);
 			moving = false;
-			world.home.radius += (combo * combo) / 4;
+			world.home.targetRadius += (int)((combo * combo) / 1f + combo * 4);
 			world.maxCombo = Math.max(combo, world.maxCombo);
 			combo = 0;
 		}

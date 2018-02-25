@@ -19,7 +19,7 @@ public class Enemy extends Entity {
 		if(dst <= world.home.radius){
 			// alive = false;
 			radius /=2;
-			world.home.radius -= 10 * energy;
+			world.home.targetRadius -= 10 * energy * world.level;
 			energy--;
 			if(energy <= 0){
 				alive = false;

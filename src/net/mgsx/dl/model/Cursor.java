@@ -31,11 +31,17 @@ public class Cursor extends Entity{
 			}
 		}
 		else if(hero != null){
-			hero.direction.set(position).sub(hero.position).nor();
-			hero.position.mulAdd(hero.direction, 20);
-			hero.moving = true;
-			hero.radius = 20;
-			hero = null;
+			hero.direction.set(position).sub(hero.position);
+			float len = hero.direction.len();
+			if(len > 1){
+				hero.position.mulAdd(hero.direction.scl(1f / len), 20);
+				hero.moving = true;
+				hero.radius = 20;
+				hero = null;
+			}else{
+				hero.direction.set(1,0);
+				hero = null;
+			}
 		}
 		
 	}
