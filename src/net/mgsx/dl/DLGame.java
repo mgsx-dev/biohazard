@@ -24,6 +24,9 @@ public class DLGame extends Game
 		menuScreen = new DLMenuScreen();
 		endScreen = new DLEndScreen();
 		
+//		endScreen.set(36, 2343, "B");
+//		setScreen(endScreen);
+		
 		setScreen(menuScreen);
 	}
 

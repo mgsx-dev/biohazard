@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -65,9 +64,9 @@ public class DLEndScreen extends StageScreen
 		main.add(createLabel("Game Over", World.homeColor, 6)).row();
 		root.add(main).expand().fill();
 		
-		main.add(comboLabel = createPlayButton("Combo 45x", 1)).row();
-		main.add(killedLabel = createPlayButton("Killed 4567x", 1)).row();
-		main.add(rankLabel = createPlayButton("Ranking A", 1)).row();
+		main.add(comboLabel = createPlayButton("Combo 45x", World.enemyColor)).row();
+		main.add(killedLabel = createPlayButton("Killed 4567x", World.enemyColor)).row();
+		main.add(rankLabel = createPlayButton("Ranking A", World.ballsColor)).row();
 		
 		buttons.add(comboLabel);
 		buttons.add(killedLabel);
@@ -100,7 +99,7 @@ public class DLEndScreen extends StageScreen
 		main.addAction(Actions.delay(delay + 3));
 	}
 	
-	private TextButton createPlayButton(String text, final int level){
+	private TextButton createPlayButton(String text, Color color){
 		
 //		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
 //		pixmap.setColor(Color.WHITE);
@@ -112,20 +111,13 @@ public class DLEndScreen extends StageScreen
 		
 		TextButtonStyle style = new TextButtonStyle();
 		style.font = font;
-		style.fontColor = new Color(World.enemyColor);
+		style.fontColor = new Color(color);
 //		style.up = up.tint(new Color(1,1,0,.3f));
 //		style.down = up.tint(new Color(0,1,1,.3f));
 		TextButton bt = new TextButton("", style);
 		bt.setTransform(true);
 		// bt.add(new Image(up.tint(World.rayColor))).size(30);
-		bt.add(createLabel(text, World.enemyColor, 4));
-		
-		bt.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				DLGame.game().startGame(level);
-			}
-		});
+		bt.add(createLabel(text, color, 4));
 		
 		return bt;
 	}

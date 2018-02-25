@@ -57,14 +57,16 @@ public class DLMenuScreen extends StageScreen
 		stage.addActor(root);
 		
 		Table main = new Table();
-		main.defaults().padBottom(20);
-		
-		main.add(createLabel("Three Blobs", World.homeColor, 6)).row();
+		main.defaults();
 		root.add(main).expand().fill();
 		
-		main.add(createPlayButton("Easy", 1)).row();
-		main.add(createPlayButton("Normal", 1)).row();
-		main.add(createPlayButton("Hard", 1)).row();
+		main.add(createLabel("B I O H A Z A R D", World.homeColor, 5)).padBottom(-20).row();
+		main.add(createLabel("A story of three blobs", World.enemyColor, 4)).padBottom(20).row();
+		
+		main.add(createPlayButton("Easy", 1)).padBottom(20).row();
+		main.add(createPlayButton("Normal", 2)).padBottom(20).row();
+		main.add(createPlayButton("Hard", 3)).row();
+		
 		
 	}
 	
