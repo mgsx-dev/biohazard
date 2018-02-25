@@ -54,7 +54,7 @@ public class Hero extends Entity {
 		if(Intersector.overlaps(circle, circle2)){
 			position.sub(world.home.position).setLength(world.home.radius + radius).add(world.home.position);
 			moving = false;
-			world.home.radius += combo * 2;
+			world.home.radius += (combo * combo) / 4;
 			world.maxCombo = Math.max(combo, world.maxCombo);
 			combo = 0;
 		}
