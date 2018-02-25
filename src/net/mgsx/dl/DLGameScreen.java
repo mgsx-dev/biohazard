@@ -55,6 +55,8 @@ public class DLGameScreen extends ScreenAdapter
 		
 		if(!pause) world.update(delta);
 		
+		gfx.alpha = world.isOver ? world.overtime : 1;
+		
 		gfx.update(delta);
 		
 		gfx.begin();

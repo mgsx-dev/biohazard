@@ -18,8 +18,8 @@ public class World {
 	public static final Color rayColor = new Color(0, 1, 0, 1);
 	public static final Color enemyColor = new Color(0, 0, 1, 1);
 
-	private int numKilled;
-	private int maxCombo;
+	public int numKilled;
+	public int maxCombo;
 	
 	private Array<Entity> entities = new Array<Entity>();
 	
@@ -29,11 +29,20 @@ public class World {
 	Cursor cursor;
 	public int combo;
 	
+	public boolean isOver;
+	public float overtime;
+	
 	private float enemyTimeout;
 	private float enemyPeriod;
 	
 	public void reset(int level) 
 	{
+		isOver = false;
+		
+//		// XXX
+//		isOver = true;
+//		overtime = 1;
+		
 		if(level == 1){
 			enemyPeriod = 1;
 		}else if(level == 2){
@@ -69,7 +78,9 @@ public class World {
 	}
 	
 	public void cursor(float x, float y) {
-		cursor.position.set(x, y);
+		if(!isOver){
+			cursor.position.set(x, y);
+		}
 	}
 	
 	private Enemy createEnemy(int energy){
@@ -81,7 +92,15 @@ public class World {
 		return enemy;
 	}
 
-	public void update(float delta) {
+	public void update(float delta) 
+	{
+		if(isOver){
+			overtime -= delta * .2f;
+			
+			if(overtime <= 0) endScreen();
+			return;
+		}
+		
 		enemyTimeout -= delta;
 		if(enemyTimeout < 0){
 			enemyTimeout += enemyPeriod;
@@ -128,6 +147,7 @@ public class World {
 			}else{
 				enemies.swap(i, enemies.size-1);
 				enemies.pop();
+				numKilled++;
 			}
 		}
 		for(int i=0 ; i<entities.size ; ){
@@ -169,13 +189,18 @@ public class World {
 		renderer.end();
 		
 	}
-
 	public void gameOver() 
+	{
+		isOver = true;
+		overtime = 1;
+	}
+	public void endScreen() 
 	{
 		// compute a ranking
 		int base = (int)(Math.sqrt(numKilled) / 10);
 		base += (int)(Math.sqrt(maxCombo) / 10);
-		char letter = (char)('F' + Math.min(base, 5));
+		char letter = (char)('F' - Math.min(base, 5));
+		
 		
 		DLGame.game().endGame(maxCombo, numKilled, String.valueOf(letter));
 	}

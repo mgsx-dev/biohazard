@@ -10,11 +10,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFontCache;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.collision.Ray;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -39,7 +38,7 @@ public class DLMenuScreen extends StageScreen
 	private BitmapFont font;
 	private BitmapFontCache cache;
 	
-	private GlyphLayout title;
+	private float time;
 	
 	
 	
@@ -112,33 +111,17 @@ public class DLMenuScreen extends StageScreen
 	@Override
 	public void render(float delta) {
 		
-		Ray ray = viewport.getPickRay(Gdx.input.getX(), Gdx.input.getY());
-		// (ray.origin.x, ray.origin.y);
+		time += delta;
+		
+		gfx.alpha = MathUtils.sin(time * 3) * MathUtils.sin(time * 300) * 0.003f + 1f + (MathUtils.sin(time) > 0.4f ? MathUtils.random() * 0.05f : 0);
 		
 		gfx.update(delta);
 		
 		gfx.begin();
-		
-		
-		float scale = 7;
-		batch.enableBlending();
-		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-		batch.setProjectionMatrix(camera.combined);
-		batch.setTransformMatrix(batch.getTransformMatrix().idt().scl(scale));
-		batch.begin();
-		
-//		font.setColor(World.homeColor);
-//		font.draw(batch, "Three Blobs", 4f, 14f);
-		
-		
-		batch.end();
 
 		super.render(delta);
 		
 		gfx.end();
-		
-		
-		
 	}
 	
 	@Override

@@ -25,6 +25,8 @@ public class SceneGFX {
 	private Batch batch;
 	private float time;
 	private Viewport viewport;
+
+	public float alpha = 1;
 	
 	public SceneGFX(int decimate) {
 		
@@ -71,7 +73,7 @@ public class SceneGFX {
 			batch.setShader(blurShader);
 			batch.begin();
 			// TODO set params
-			blurShader.setUniformf("u_size", blurSize.set(fboBlurSrc.getWidth(), fboBlurSrc.getHeight(), .5f));
+			blurShader.setUniformf("u_size", blurSize.set(fboBlurSrc.getWidth(), fboBlurSrc.getHeight(), .5f + MathUtils.lerp(30, 0, alpha)));
 			batch.draw(fboBlurSrc.getColorBufferTexture(), 0, 0, World.WIDTH, World.HEIGHT, 0, 0, 1, 1);
 			batch.end();
 			fboBlurDst.end();
