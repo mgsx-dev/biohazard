@@ -9,12 +9,12 @@ buildscript {
 
 }
 
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 ext {
     appName = "dl-gamejam-1"
     gdxVersion = '1.9.6'
     junitVersion = '4.12'
-    mainClassName = "net.mgsx.dl.dl-gamejam-1"
+    mainClassName = "net.mgsx.dl.DLGame"
     assetsDir = new File("assets");
 }
 
@@ -73,10 +73,16 @@ task dist(type: Jar) {
     from files(sourceSets.main.output.resourcesDir)
     from {configurations.compile.collect {zipTree(it)}}
     from files(project.assetsDir);
- 
+    from file("$projectDir/LICENSE");
+    
+ 	baseName = 'biohazard'
+
     manifest {
         attributes 'Main-Class': project.mainClassName
     }
+    doLast { 
+    	file(archivePath).setExecutable(true, false) 
+    } 
 }
 
 dist.dependsOn classes
