@@ -1,6 +1,7 @@
 package net.mgsx.dl;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -13,8 +14,34 @@ public class DLGame extends Game
 		new LwjglApplication(new DLGame(), config);
 	}
 
+	private DLGameScreen gameScreen;
+	private DLMenuScreen menuScreen;
+	private DLEndScreen endScreen;
+
 	@Override
 	public void create () {
-		setScreen(new DLGameScreen());
+		gameScreen = new DLGameScreen();
+		menuScreen = new DLMenuScreen();
+		endScreen = new DLEndScreen();
+		
+		setScreen(menuScreen);
+	}
+
+	public static DLGame game() {
+		return (DLGame)Gdx.app.getApplicationListener();
+	}
+
+	public void startGame(int level) {
+		gameScreen.set(level);
+		setScreen(gameScreen);
+	}
+
+	public void showMenu() {
+		setScreen(menuScreen);
+	}
+
+	public void endGame(int maxCombo, int enemiesKilled, String rank) {
+		endScreen.set(maxCombo, enemiesKilled, rank);
+		setScreen(endScreen);
 	}
 }

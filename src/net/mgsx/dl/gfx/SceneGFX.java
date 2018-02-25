@@ -26,8 +26,7 @@ public class SceneGFX {
 	private float time;
 	private Viewport viewport;
 	
-	public SceneGFX() {
-		int decimate = 8;
+	public SceneGFX(int decimate) {
 		
 		int width = World.WIDTH / decimate;
 		int height = World.HEIGHT / decimate;

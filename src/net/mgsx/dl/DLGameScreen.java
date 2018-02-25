@@ -36,11 +36,13 @@ public class DLGameScreen extends ScreenAdapter
 		viewport = new FitViewport(World.WIDTH, World.HEIGHT, camera);
 		renderer = new ShapeRenderer();
 		world = new World();
-		gfx = new SceneGFX();
+		gfx = new SceneGFX(8);
 		font = new BitmapFont();
 		batch = new SpriteBatch();
-		
-
+	}
+	
+	public void set(int level){
+		world.reset(level);
 	}
 	
 	@Override

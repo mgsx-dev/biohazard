@@ -21,6 +21,7 @@ public class Home extends Entity
 			radius = maxRadius;
 		}
 		if(radius < minRadius){
+			world.gameOver();
 			radius = minRadius;
 			growing = true;
 		}

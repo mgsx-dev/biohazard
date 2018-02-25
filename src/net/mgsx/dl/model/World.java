@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
+import net.mgsx.dl.DLGame;
+
 public class World {
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 480;
@@ -16,17 +18,36 @@ public class World {
 	public static final Color rayColor = new Color(0, 1, 0, 1);
 	public static final Color enemyColor = new Color(0, 0, 1, 1);
 
+	private int numKilled;
+	private int maxCombo;
+	
 	private Array<Entity> entities = new Array<Entity>();
 	
-	Entity home;
+	Home home;
 	Array<Hero> heroes = new Array<Hero>();
 	public Array<Enemy> enemies = new Array<Enemy>();
 	Cursor cursor;
 	public int combo;
 	
 	private float enemyTimeout;
+	private float enemyPeriod;
 	
-	public World() {
+	public void reset(int level) 
+	{
+		if(level == 1){
+			enemyPeriod = 1;
+		}else if(level == 2){
+			enemyPeriod = .3f;
+		}else{
+			enemyPeriod = .1f;
+		}
+		
+		maxCombo = 0;
+		numKilled = 0;
+		entities.clear();
+		enemies.clear();
+		heroes.clear();
+		
 		home = new Home();
 		home.position.set(WIDTH/2, HEIGHT/2);
 		entities.add(home);
@@ -63,7 +84,7 @@ public class World {
 	public void update(float delta) {
 		enemyTimeout -= delta;
 		if(enemyTimeout < 0){
-			enemyTimeout += 1f;
+			enemyTimeout += enemyPeriod;
 			if(enemies.size < 100){ // XXX hard limit
 				Enemy enemy = createEnemy(MathUtils.random(1, 3));
 				float angle = MathUtils.random(360f);
@@ -148,5 +169,17 @@ public class World {
 		renderer.end();
 		
 	}
+
+	public void gameOver() 
+	{
+		// compute a ranking
+		int base = (int)(Math.sqrt(numKilled) / 10);
+		base += (int)(Math.sqrt(maxCombo) / 10);
+		char letter = (char)('F' + Math.min(base, 5));
+		
+		DLGame.game().endGame(maxCombo, numKilled, String.valueOf(letter));
+	}
+
+	
 
 }
