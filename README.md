@@ -1,4 +1,8 @@
 
+![biohazard](cover.png)
+
+[Get the game on Itch.io](https://mgsx.itch.io/biohazard)
+
 # Licence
 
 BIOHAZARD (c) by MGSX
