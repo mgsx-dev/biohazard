@@ -3,6 +3,12 @@
 
 [Get the game on Itch.io](https://mgsx.itch.io/biohazard)
 
+# Contributing
+
+* require java (jre/jdk) 1.8+
+* require Android SDK
+* require Gwt sdk 2.8.1
+
 # Licence
 
 BIOHAZARD (c) by MGSX
