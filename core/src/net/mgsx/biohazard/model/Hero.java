@@ -1,4 +1,4 @@
-package net.mgsx.dl.model;
+package net.mgsx.biohazard.model;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;

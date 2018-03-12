@@ -1,4 +1,4 @@
-package net.mgsx.dl.utils;
+package net.mgsx.biohazard.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;

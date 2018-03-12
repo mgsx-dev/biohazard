@@ -1,4 +1,4 @@
-package net.mgsx.dl;
+package net.mgsx.biohazard;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -22,11 +22,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import net.mgsx.dl.gfx.SceneGFX;
-import net.mgsx.dl.model.World;
-import net.mgsx.dl.utils.StageScreen;
+import net.mgsx.biohazard.gfx.SceneGFX;
+import net.mgsx.biohazard.model.World;
+import net.mgsx.biohazard.utils.StageScreen;
 
-public class DLEndScreen extends StageScreen
+public class BiohazardEndScreen extends StageScreen
 {
 	private ShapeRenderer renderer;
 	private OrthographicCamera camera;
@@ -45,7 +45,7 @@ public class DLEndScreen extends StageScreen
 	private Table main;
 	
 	
-	public DLEndScreen() {
+	public BiohazardEndScreen() {
 		super(new FitViewport(World.WIDTH, World.HEIGHT));
 		camera = new OrthographicCamera();
 		viewport.setCamera(camera);
@@ -151,7 +151,7 @@ public class DLEndScreen extends StageScreen
 		gfx.end();
 		
 		if(!main.hasActions()){
-			DLGame.game().showMenu();
+			BiohazardGame.game().showMenu();
 		}
 		
 	}

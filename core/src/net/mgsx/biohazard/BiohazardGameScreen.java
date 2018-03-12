@@ -1,4 +1,4 @@
-package net.mgsx.dl;
+package net.mgsx.biohazard;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -14,10 +14,10 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import net.mgsx.dl.gfx.SceneGFX;
-import net.mgsx.dl.model.World;
+import net.mgsx.biohazard.gfx.SceneGFX;
+import net.mgsx.biohazard.model.World;
 
-public class DLGameScreen extends ScreenAdapter
+public class BiohazardGameScreen extends ScreenAdapter
 {
 	public static final boolean DEBUG = true;
 	
@@ -32,7 +32,7 @@ public class DLGameScreen extends ScreenAdapter
 	private BitmapFont font;
 	
 	
-	public DLGameScreen() {
+	public BiohazardGameScreen() {
 		camera = new OrthographicCamera();
 		viewport = new FitViewport(World.WIDTH, World.HEIGHT, camera);
 		renderer = new ShapeRenderer();

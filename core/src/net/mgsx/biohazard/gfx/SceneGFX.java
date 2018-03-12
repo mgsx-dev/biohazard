@@ -1,4 +1,4 @@
-package net.mgsx.dl.gfx;
+package net.mgsx.biohazard.gfx;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import net.mgsx.dl.model.World;
+import net.mgsx.biohazard.model.World;
 
 public class SceneGFX {
 

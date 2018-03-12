@@ -1,19 +1,19 @@
-package net.mgsx.dl;
+package net.mgsx.biohazard;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
-public class DLGame extends Game 
+public class BiohazardGame extends Game 
 {
-	private DLGameScreen gameScreen;
-	private DLMenuScreen menuScreen;
-	private DLEndScreen endScreen;
+	private BiohazardGameScreen gameScreen;
+	private BiohazardMenuScreen menuScreen;
+	private BiohazardEndScreen endScreen;
 
 	@Override
 	public void create () {
-		gameScreen = new DLGameScreen();
-		menuScreen = new DLMenuScreen();
-		endScreen = new DLEndScreen();
+		gameScreen = new BiohazardGameScreen();
+		menuScreen = new BiohazardMenuScreen();
+		endScreen = new BiohazardEndScreen();
 		
 //		endScreen.set(36, 2343, "B");
 //		setScreen(endScreen);
@@ -21,8 +21,8 @@ public class DLGame extends Game
 		setScreen(menuScreen);
 	}
 
-	public static DLGame game() {
-		return (DLGame)Gdx.app.getApplicationListener();
+	public static BiohazardGame game() {
+		return (BiohazardGame)Gdx.app.getApplicationListener();
 	}
 
 	public void startGame(int level) {

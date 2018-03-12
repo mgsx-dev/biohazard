@@ -1,16 +1,16 @@
-package net.mgsx.dl;
+package net.mgsx.biohazard;
 
 import android.os.Bundle;
+import net.mgsx.biohazard.BiohazardGame;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import net.mgsx.dl.DLGame;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new DLGame(), config);
+		initialize(new BiohazardGame(), config);
 	}
 }

@@ -1,4 +1,4 @@
-package net.mgsx.dl.model;
+package net.mgsx.biohazard.model;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
-import net.mgsx.dl.DLGame;
+import net.mgsx.biohazard.BiohazardGame;
 
 public class World {
 	public static final int WIDTH = 640;
@@ -204,7 +204,7 @@ public class World {
 		char letter = (char)('F' - Math.min(base, 5));
 		
 		
-		DLGame.game().endGame(maxCombo, numKilled, String.valueOf(letter));
+		BiohazardGame.game().endGame(maxCombo, numKilled, String.valueOf(letter));
 	}
 
 	
