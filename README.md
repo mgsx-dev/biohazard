@@ -9,6 +9,10 @@
 * require Android SDK
 * require Gwt sdk 2.8.1
 
+# Troubleshooting
+
+* android with eclipse need to export project and external dependencies (in project "Java Build Path" / "Order and Export"
+
 # Licence
 
 BIOHAZARD (c) by MGSX

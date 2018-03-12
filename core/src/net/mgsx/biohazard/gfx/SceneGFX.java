@@ -63,6 +63,9 @@ public class SceneGFX {
 		batch.disableBlending();
 		FrameBuffer fboBlurSrc = fboBlur;
 		FrameBuffer fboBlurDst = fboFlat;
+		
+		batch.getProjectionMatrix().setToOrtho2D(0, 0, World.WIDTH, World.HEIGHT);
+		
 		for(int i=0 ; i<blurPasses ; i++){
 			// swap
 			FrameBuffer tmp = fboBlurSrc;
@@ -79,7 +82,9 @@ public class SceneGFX {
 			fboBlurDst.end();
 		}
 		viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		viewport.apply();
+		viewport.apply(true);
+		
+		batch.getProjectionMatrix().set(viewport.getCamera().combined);
 		
 		// TODO blur it
 		// Gdx.gl.glClearColor(0, 0, 0, 0);
