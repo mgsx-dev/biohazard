@@ -1,5 +1,6 @@
 package net.mgsx.biohazard.model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -131,12 +132,24 @@ public class World {
 					if(enemy.position.dst2(hero.position) < dst*dst){
 						enemy.energy--;
 						enemy.alive = false;
+
+
 						if(enemy.energy > 1){
 							for(int j=0 ; j<2 ; j++){
 								Enemy child = createEnemy(enemy.energy-1);
 								child.position.set(enemy.position).add(MathUtils.random(enemy.radius * 4), MathUtils.random(enemy.radius * 4));
 								child.shieldTime = 1;
 							}
+
+							if (enemy.energy == 3) {
+								Gdx.input.vibrate(new long[]{0, 120, 100, 120}, -1);
+							}
+							else if (enemy.energy == 2){
+								Gdx.input.vibrate(new long[]{0, 60, 100, 60}, -1);
+							}
+						}
+						else {
+							Gdx.input.vibrate(new long[] { 0, 30, 100, 30}, -1);
 						}
 						if(hero.moving){
 							hero.combo++;
