@@ -12,6 +12,7 @@ public class Hero extends Entity {
 	
 	Vector2 direction = new Vector2();
 	private Vector2 target = new Vector2();
+	public float speed;
 	
 	boolean moving;
 	public int combo;
@@ -30,7 +31,7 @@ public class Hero extends Entity {
 //			}
 //		}
 		if(moving){
-			position.mulAdd(direction, 1200 * deltaTime);
+			position.mulAdd(direction, 1200*speed * deltaTime);
 			if(position.x <= 0){
 				position.x = 0;
 				direction.x = -direction.x;
