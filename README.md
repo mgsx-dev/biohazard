@@ -9,9 +9,16 @@
 * require Android SDK
 * require Gwt sdk 2.8.1
 
+create a local file **local.properties** with content :
+
+```
+sdk.dir=Location of your android SDK
+```
+
 # Troubleshooting
 
 * android with eclipse need to export project and external dependencies (in project "Java Build Path" / "Order and Export"
+* 
 
 # Licence
 
