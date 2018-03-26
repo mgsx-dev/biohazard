@@ -3,6 +3,7 @@ package net.mgsx.biohazard.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 public class Cursor extends Entity{
@@ -40,7 +41,7 @@ public class Cursor extends Entity{
 			float len = hero.direction.len();
 			if(Math.abs(len) > 1){
 				hero.position.mulAdd(hero.direction.scl(1f / len),20);
-				hero.speed = len/300+0.25f;
+				hero.speed = MathUtils.clamp(len/300, 0, 1) + 0.5f;
 				hero.moving = true;
 				hero.radius = 20;
 				hero = null;
