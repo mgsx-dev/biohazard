@@ -31,10 +31,16 @@ public class Cursor extends Entity{
 			}
 		}
 		else if(hero != null){
+			//hero.direction.set(position.x, position.y).sub(hero.position.x, -hero.position.y);
 			hero.direction.set(position).sub(hero.position);
+			if(new Vector2(world.home.position).sub(hero.position).dot(hero.direction) > 0) {
+			hero.direction.x *= -1;
+			hero.direction.y *= -1;
+			}
 			float len = hero.direction.len();
-			if(len > 1){
-				hero.position.mulAdd(hero.direction.scl(1f / len), 20);
+			if(Math.abs(len) > 1){
+				hero.position.mulAdd(hero.direction.scl(1f / len),20);
+				hero.speed = len/300+0.25f;
 				hero.moving = true;
 				hero.radius = 20;
 				hero = null;
@@ -53,10 +59,14 @@ public class Cursor extends Entity{
 		if(hero != null){
 			// draw ray
 			int maxRays = 7;
-			a.set(hero.position);
-			b.set(position);
+			a.set(hero.position.x, hero.position.y);
+			b.set(position.x,position.y);
 			dir.set(b).sub(a);
 			dir.nor();
+			if(new Vector2(world.home.position).sub(hero.position).dot(dir) > 0) {
+			dir.x *=-1;
+			dir.y *=-1;
+			}
 			float minx = hero.radius;
 			float miny = hero.radius;
 			float maxx = World.WIDTH - hero.radius;
