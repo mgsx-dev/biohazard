@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 import net.mgsx.biohazard.BiohazardGame;
+import net.mgsx.biohazard.audio.BiohazardAudio;
 
 public class World {
 	public static final int WIDTH = 640;
@@ -154,6 +155,8 @@ public class World {
 						if(hero.moving){
 							hero.combo++;
 						}
+						// TODO limit and pitch with combo ?
+						BiohazardAudio.i().playSoundKill();
 					}
 				}
 			}
@@ -208,6 +211,7 @@ public class World {
 	{
 		isOver = true;
 		overtime = 1;
+		BiohazardAudio.i().playMusicEnd();
 	}
 	public void endScreen() 
 	{

@@ -49,6 +49,7 @@ public class BiohazardGameScreen extends ScreenAdapter
 	@Override
 	public void render(float delta) {
 		
+		// TODO pause music as well ?
 		if(DEBUG && Gdx.input.isKeyJustPressed(Keys.SPACE)) pause = !pause;
 		
 		Ray ray = viewport.getPickRay(Gdx.input.getX(), Gdx.input.getY());

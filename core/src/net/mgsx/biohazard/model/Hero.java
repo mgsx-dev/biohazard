@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 
+import net.mgsx.biohazard.audio.BiohazardAudio;
+
 public class Hero extends Entity {
 
 	private static Circle circle = new Circle();
@@ -61,6 +63,9 @@ public class Hero extends Entity {
 			moving = false;
 			world.home.targetRadius += (int)((combo * combo) / 1f + combo * 4);
 			world.maxCombo = Math.max(combo, world.maxCombo);
+			if(combo > 1){
+				BiohazardAudio.i().playSoundBigger();
+			}
 			combo = 0;
 		}
 	}

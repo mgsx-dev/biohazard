@@ -3,6 +3,8 @@ package net.mgsx.biohazard.model;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
+import net.mgsx.biohazard.audio.BiohazardAudio;
+
 public class Enemy extends Entity {
 
 	private Vector2 direction = new Vector2();
@@ -25,6 +27,7 @@ public class Enemy extends Entity {
 				alive = false;
 				energy = 0;
 			}
+			BiohazardAudio.i().playSoundSmaller();
 		}else{
 			direction.scl(1f / dst);
 			position.mulAdd(direction, .1f * dst * deltaTime);

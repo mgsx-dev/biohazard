@@ -3,6 +3,8 @@ package net.mgsx.biohazard;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
+import net.mgsx.biohazard.audio.BiohazardAudio;
+
 public class BiohazardGame extends Game 
 {
 	private BiohazardGameScreen gameScreen;
@@ -18,7 +20,7 @@ public class BiohazardGame extends Game
 //		endScreen.set(36, 2343, "B");
 //		setScreen(endScreen);
 		
-		setScreen(menuScreen);
+		showMenu();
 	}
 
 	public static BiohazardGame game() {
@@ -26,11 +28,14 @@ public class BiohazardGame extends Game
 	}
 
 	public void startGame(int level) {
+		BiohazardAudio.i().playMusicGame();
+		BiohazardAudio.i().playSoundStart();
 		gameScreen.set(level);
 		setScreen(gameScreen);
 	}
 
 	public void showMenu() {
+		BiohazardAudio.i().playMusicMenu();
 		setScreen(menuScreen);
 	}
 
